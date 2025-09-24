@@ -1,0 +1,15 @@
+meta {
+  name: Get User Transaction
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{dev_url}}/api/transactions/1234
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

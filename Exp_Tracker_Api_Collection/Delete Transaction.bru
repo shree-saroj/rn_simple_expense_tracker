@@ -1,0 +1,15 @@
+meta {
+  name: Delete Transaction
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{dev_url}}/api/transactions/8ads
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

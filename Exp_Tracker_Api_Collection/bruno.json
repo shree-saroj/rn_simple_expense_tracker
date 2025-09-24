@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Exp_Tracker",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

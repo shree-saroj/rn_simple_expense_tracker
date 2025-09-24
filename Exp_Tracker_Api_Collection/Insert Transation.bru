@@ -1,0 +1,24 @@
+meta {
+  name: Insert Transation
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{dev_url}}/api/transactions
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "user_id": "123",
+    "title": "College",
+    "amount": 11000,
+    "category": "expense"
+  }
+}
+
+settings {
+  encodeUrl: true
+}
