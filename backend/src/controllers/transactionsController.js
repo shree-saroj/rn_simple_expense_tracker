@@ -105,14 +105,14 @@ export async function getUserTrnsactionSummary(req, res) {
     const { userId } = req.params;
     let response = {};
     let summary = {};
-    if (!isNaN(userId)) {
+    if (userId != null || userId != undefined || userId != "") {
       const result = await sql`
-      SELECT 
-        COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0) AS total_income,
-        COALESCE(SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END), 0) AS total_expense
-      FROM Transactions
-      WHERE user_id = ${userId};
-    `;
+        SELECT 
+          COALESCE(SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END), 0) AS total_income,
+          COALESCE(SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END), 0) AS total_expense
+        FROM Transactions
+        WHERE user_id = ${userId};
+      `;
       if (result.length === 0) {
         summary = {
           total_income: 0,
@@ -140,7 +140,7 @@ export async function getUserTrnsactionSummary(req, res) {
     } else {
       response = {
         message: "Invalid user ID",
-        data: {},
+        data: { total_income: 0, total_expense: 0, balance: 0 },
         status: 400,
       };
     }
@@ -148,7 +148,7 @@ export async function getUserTrnsactionSummary(req, res) {
   } catch (err) {
     const response = {
       message: "Error fetching summary",
-      data: {},
+      data: { total_income: 0, total_expense: 0, balance: 0 },
       status: 500,
     };
     res.status(500).json(response);
