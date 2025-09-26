@@ -2,8 +2,11 @@
 
 import { useCallback, useState } from "react";
 import { Alert } from "react-native";
-const API_URL: string =
-  process.env.EXPO_PUBLIC_API_URL + "/api" || "http://localhost:3000/api";
+const prodUrl = process.env.EXPO_PUBLIC_PUBLIC_API?.trim();
+const localUrl = process.env.EXPO_PUBLIC_LOCAL_API?.trim();
+
+const API_URL =
+  (process.env.NODE_ENV === "production" ? prodUrl : localUrl) + "/api";
 
 export const useTransactions = (userId: string) => {
   const [transactions, setTransactions] = useState([]);
